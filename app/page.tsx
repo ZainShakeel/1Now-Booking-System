@@ -134,9 +134,9 @@ export default function BookingRequestsPage() {
   return (
     <>
       <AppHeader />
-      <main className="mx-auto max-w-6xl px-4 py-8">
+      <main className="mx-auto max-w-6xl px-4 py-6 sm:py-8">
         <div className="mb-5">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             Booking Requests
           </h1>
           <p className="mt-1 text-sm text-slate-500">
@@ -155,10 +155,10 @@ export default function BookingRequestsPage() {
           </div>
         )}
 
-        <div className="mb-5 flex items-center justify-between gap-3">
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           <StatusTabs active={activeTab} counts={counts} onChange={selectTab} />
           {/* Small helper to demo the error state from the UI. */}
-          <label className="flex items-center gap-2 text-xs text-slate-500">
+          <label className="flex flex-none items-center gap-2 text-xs text-slate-500">
             <input
               type="checkbox"
               checked={forceFail}
@@ -223,7 +223,7 @@ export default function BookingRequestsPage() {
 
       {/* Detail panel — full-screen overlay on mobile. */}
       {selected && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-white lg:hidden">
+        <div className="fixed inset-0 z-50 flex flex-col bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
           <BookingDetail
             booking={selected}
             isSaving={savingId === selected.id}

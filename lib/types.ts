@@ -11,6 +11,7 @@ export interface Booking {
   id: string;
   renterName: string;
   carName: string;
+  carImage: string; // path to the car photo in /public
   carValueUsd: number;
   pickupDate: string; // ISO date-time
   returnDate: string; // ISO date-time

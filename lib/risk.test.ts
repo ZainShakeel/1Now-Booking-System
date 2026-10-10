@@ -13,6 +13,7 @@ function makeBooking(overrides: Partial<Booking> = {}): Booking {
     id: "test-1",
     renterName: "Test Renter",
     carName: "Honda Civic",
+    carImage: "/cars/civic.webp",
     carValueUsd: 25_000,
     pickupDate: "2026-07-01T10:00:00.000Z", // ~2 weeks out
     returnDate: "2026-07-04T10:00:00.000Z", // 3-day trip

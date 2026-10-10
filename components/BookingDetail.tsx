@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Booking, BookingStatus } from "@/lib/types";
 import { assessRisk } from "@/lib/risk";
 import { RiskBadge } from "./RiskBadge";
+import { CarThumb } from "./CarThumb";
 import { formatDate, formatPrice, tripLengthDays } from "@/lib/format";
 
 // Detail panel for a single booking. Shows the plain-language reasons
@@ -48,14 +49,22 @@ export function BookingDetail({
       aria-label={`Booking request from ${booking.renterName}`}
       className="flex h-full flex-col bg-white"
     >
-      <header className="flex items-start justify-between gap-3 border-b border-slate-200 p-5">
-        <div>
-          <h2 className="text-lg font-semibold text-slate-900">
-            {booking.renterName}
-          </h2>
-          <p className="text-sm text-slate-500">{booking.carName}</p>
-          <div className="mt-2">
-            <RiskBadge level={risk.level} />
+      <header className="flex items-start justify-between gap-3 border-b border-slate-200 p-4 sm:p-5">
+        <div className="flex min-w-0 gap-3">
+          <CarThumb
+            src={booking.carImage}
+            alt={booking.carName}
+            size={56}
+            className="flex-none"
+          />
+          <div className="min-w-0">
+            <h2 className="truncate text-lg font-semibold text-slate-900">
+              {booking.renterName}
+            </h2>
+            <p className="truncate text-sm text-slate-500">{booking.carName}</p>
+            <div className="mt-2">
+              <RiskBadge level={risk.level} />
+            </div>
           </div>
         </div>
         {/* Close is most useful on mobile where the panel is full-screen. */}
@@ -69,7 +78,7 @@ export function BookingDetail({
         </button>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-5">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-5">
         <dl className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <dt className="text-slate-500">Pickup</dt>
@@ -136,7 +145,7 @@ export function BookingDetail({
 
       {/* Actions only make sense while the request is still pending. */}
       {isPending && (
-        <footer className="border-t border-slate-200 p-5">
+        <footer className="border-t border-slate-200 p-4 sm:p-5">
           {saveError && (
             <p role="alert" className="mb-3 text-sm font-medium text-red-700">
               {saveError}

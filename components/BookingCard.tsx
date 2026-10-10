@@ -1,6 +1,7 @@
 import type { Booking } from "@/lib/types";
 import { assessRisk } from "@/lib/risk";
 import { RiskBadge } from "./RiskBadge";
+import { CarThumb } from "./CarThumb";
 import { formatDate, formatPrice, tripLengthDays } from "@/lib/format";
 
 // One booking request in the list. Clickable to open the detail panel.
@@ -29,34 +30,55 @@ export function BookingCard({
             : "border-slate-200"
         }`}
       >
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <p className="font-semibold text-slate-900">{booking.renterName}</p>
-            <p className="text-sm text-slate-500">{booking.carName}</p>
-          </div>
-          <RiskBadge level={risk.level} />
-        </div>
+        <div className="flex gap-3">
+          {/* Car photo on the left, like a real fleet dashboard. */}
+          <CarThumb
+            src={booking.carImage}
+            alt={booking.carName}
+            size={56}
+            className="mt-0.5 flex-none"
+          />
 
-        <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-slate-600">
-          <div>
-            <dt className="sr-only">Trip dates</dt>
-            <dd>
-              {formatDate(booking.pickupDate)} → {formatDate(booking.returnDate)}
-            </dd>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="truncate font-semibold text-slate-900">
+                  {booking.renterName}
+                </p>
+                <p className="truncate text-sm text-slate-500">
+                  {booking.carName}
+                </p>
+              </div>
+              <RiskBadge level={risk.level} />
+            </div>
+
+            <dl className="mt-3 text-sm text-slate-600">
+          <div className="flex items-baseline justify-between gap-3">
+            <div>
+              <dt className="sr-only">Trip dates</dt>
+              {/* Dates can wrap on very narrow screens instead of
+                  overflowing or crushing the price. */}
+              <dd className="leading-snug">
+                {formatDate(booking.pickupDate)} →{" "}
+                {formatDate(booking.returnDate)}
+              </dd>
+            </div>
+            <div className="flex-none text-right">
+              <dt className="sr-only">Total price</dt>
+              <dd className="font-medium text-slate-900">
+                {formatPrice(booking.totalPriceUsd)}
+              </dd>
+            </div>
           </div>
-          <div className="text-right">
-            <dt className="sr-only">Total price</dt>
-            <dd className="font-medium text-slate-900">
-              {formatPrice(booking.totalPriceUsd)}
-            </dd>
+            <div className="mt-1">
+              <dt className="sr-only">Trip length</dt>
+              <dd>
+                {days} {days === 1 ? "day" : "days"}
+              </dd>
+            </div>
+            </dl>
           </div>
-          <div>
-            <dt className="sr-only">Trip length</dt>
-            <dd>
-              {days} {days === 1 ? "day" : "days"}
-            </dd>
-          </div>
-        </dl>
+        </div>
       </button>
     </li>
   );

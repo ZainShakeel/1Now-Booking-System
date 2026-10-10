@@ -31,14 +31,16 @@ export function Toast({
       aria-live="polite"
       className="fixed inset-x-0 bottom-6 z-[60] flex justify-center px-4"
     >
-      <div className="flex items-center gap-3 rounded-full border border-slate-200 bg-white py-2.5 pl-2.5 pr-4 shadow-lg">
+      <div className="flex max-w-full items-center gap-3 rounded-full border border-slate-200 bg-white py-2.5 pl-2.5 pr-4 shadow-lg">
         <span
           aria-hidden="true"
           className={`flex h-7 w-7 flex-none items-center justify-center rounded-full text-sm font-bold ${iconClasses}`}
         >
           {icon}
         </span>
-        <span className="text-sm font-medium text-slate-900">{message}</span>
+        <span className="min-w-0 truncate text-sm font-medium text-slate-900">
+          {message}
+        </span>
         <button
           type="button"
           onClick={onClose}

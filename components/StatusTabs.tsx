@@ -32,7 +32,7 @@ export function StatusTabs({
             type="button"
             aria-selected={isActive}
             onClick={() => onChange(tab.key)}
-            className={`-mb-px border-b-2 px-4 py-2.5 text-sm font-medium transition-colors ${
+            className={`-mb-px whitespace-nowrap border-b-2 px-3 py-2.5 text-sm font-medium transition-colors sm:px-4 ${
               isActive
                 ? "border-blue-600 text-blue-700"
                 : "border-transparent text-slate-500 hover:text-slate-800"
